@@ -5,9 +5,7 @@
 # Author: stubborn vegeta
 # Created Time: 2020年07月08日 星期三 23时03分01秒
 ##########################################################################
-import os
 import pyperclip
-
 
 def head():
     return r"""
