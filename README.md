@@ -24,6 +24,15 @@ You should install anaconda.
 
 You should install tensorflow.
 
+
+## loadusb.sh
+
+Load usb device and cd the path where the usb mounted.
+
+## removeusb.sh
+
+remove your usb device.
+
 <!--autostart.sh-->
 <!--brightnessDown.sh-->
 <!--brightnessUp.sh-->

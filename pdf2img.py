@@ -11,7 +11,7 @@ from pdf2image import convert_from_path,convert_from_bytes
  
 parser = argparse.ArgumentParser(description='pdf2image')
 parser.add_argument('--inputfile', '-i', help='input your pdf file',required=True)
-parser.add_argument('--dpi', '-d', help='input your image dpi',default=400)
+parser.add_argument('--dpi', '-d', help='input your image dpi',default=600)
 parser.add_argument('--outfolder', '-f', help='set your image\'s path', required=True)
 parser.add_argument('--outfile', '-o', help='set your image\'s name', default="out")
 args = parser.parse_args()

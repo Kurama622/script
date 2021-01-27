@@ -395,7 +395,6 @@ if __name__ == '__main__':
     clipStringPre = ''.join(cliplistpre)
     pyperclip.copy(clipStringPre)
     start = True
-    PATH = '/home/vegeta/Desktop/Translate/'
     while start:
         clipString = pyperclip.paste()          # getclip
         cliplist = list(clipString)
