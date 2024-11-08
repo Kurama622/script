@@ -57,7 +57,7 @@ print_volume() {
 
 print_mem(){
     memfree=$(($(grep -m1 'MemAvailable:' /proc/meminfo | awk '{print $2}') / 1024))
-    echo -e "$memfree"
+    echo -e "\x04[${memfree}M] "
 }
 
 print_temp(){
@@ -131,7 +131,8 @@ print_bat(){
 print_date(){
     #echo '📆 '; date '+%Y-%m-%d | %H:%M'
     # printf "📆 %s" "$(date "+%a %y-%m-%d $%T")"
-    printf "%s" "$(date "+[%a %y-%m-%d]——[%T]")"
+    # printf "\x03%s" "$(date "+[%a %y-%m-%d]——[%T]")"
+    echo -e "\x03$(date '+[%a %y-%m-%d]——[%T]')"
 }
 
 show_record(){
@@ -168,7 +169,6 @@ dwm_alsa () {
     printf "%s\n" "$SEP2"
 }
 
-
 LOC=$(readlink -f "$0")
 DIR=$(dirname "$LOC")
 export IDENTIFIER="unicode"
@@ -194,7 +194,9 @@ export IDENTIFIER="unicode"
 #vel_trans=$(get_velocity $transmitted_bytes $old_transmitted_bytes $now)
 
 #xsetroot -name " 💿$(print_mem)G | $(dwm_network) ⬇️ $vel_recv ⬆️ $vel_trans $(dwm_alsa) [$(print_bat)]$(show_record) $(print_date) "
-xsetroot -name " [$(print_mem)M] $(print_date)"
+
+# xsetroot -name " $(print_mem)$(print_space)$(print_date)"
+xsetroot -name " $(print_mem)$(print_date)"
 
 # Update old values to perform new calculations
 #old_received_bytes=$received_bytes
