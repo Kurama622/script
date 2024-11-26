@@ -12,6 +12,10 @@
 #now=$(date +%s%N)
 #}
 
+print_dash() {
+  echo -e "\x01——"
+}
+
 dwm_network() {
   CONNAME=$(nmcli -a | grep '已连接' | awk 'NR==1{print $4}')
   if [ "$IDENTIFIER" = "unicode" ]; then
@@ -57,12 +61,14 @@ print_volume() {
 
 print_network() {
   network_name=$(nmcli | grep 'connected to ' | awk -F 'connected to ' '{print $2}')
-  echo -e " \x01(${network_name}) "
+  if [[ $network_name ]]; then
+    echo -e "\x01[${network_name}]"
+  fi
 }
 
 print_mem() {
   memfree=$(($(grep -m1 'MemAvailable:' /proc/meminfo | awk '{print $2}') / 1024))
-  echo -e "\x04[${memfree}M] "
+  echo -e "\x04[${memfree}M]"
 }
 
 print_temp() {
@@ -135,7 +141,7 @@ print_date() {
   #echo '📆 '; date '+%Y-%m-%d | %H:%M'
   # printf "📆 %s" "$(date "+%a %y-%m-%d $%T")"
   # printf "\x03%s" "$(date "+[%a %y-%m-%d]——[%T]")"
-  echo -e "\x03$(date '+[%a %y-%m-%d]——[%T]')"
+  echo -e "\x03$(date '+[%a %y-%m-%d]\x01——\x03[%T]')"
 }
 
 show_record() {
@@ -199,7 +205,8 @@ export IDENTIFIER="unicode"
 #xsetroot -name " 💿$(print_mem)G | $(dwm_network) ⬇️ $vel_recv ⬆️ $vel_trans $(dwm_alsa) [$(print_bat)]$(show_record) $(print_date) "
 
 # xsetroot -name " $(print_mem)$(print_space)$(print_date)"
-xsetroot -name "$(print_network)$(print_mem)$(print_date)"
+xsetroot -name "$(print_network)$(print_dash)$(print_mem)$(print_dash)$(print_date)"
+# xsetroot -name "$(print_mem)$(print_date)"
 
 # Update old values to perform new calculations
 #old_received_bytes=$received_bytes
